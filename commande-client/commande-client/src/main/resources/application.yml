@@ -1,0 +1,11 @@
+server:
+  servlet:
+    context-path: /api
+
+spring:
+  profiles:
+    active: test
+
+    entity:
+      name:
+        client: client
