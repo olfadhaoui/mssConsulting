@@ -90,7 +90,7 @@ public class ProduitServiceImpl implements ProduitService {
         Produit produit= produitRepository.getOne(idProduit);
         Categorie categorie=categorieRepository.getOne(idCategorie);
        produit.setCategorie(categorie);
-        //projetRepository.save(projet);
+
         return produit;
     }
 }

@@ -2,6 +2,7 @@ package com.olfa.commandeclient.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.olfa.commandeclient.models.ProduitModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,8 +11,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
 
 /**
  * @author olfa dhaoui
@@ -25,28 +24,32 @@ import java.util.List;
 @Builder
 @Entity
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@Table(name = "COMMANDE")
-public class Commande implements Serializable {
+@Table(name = "LIGNE_COMMANDE")
+public class LigneCommande implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ID")
     private Long id;
     @Column(nullable = false)
-    private String numero;
+    private Long qte;
     @Column(nullable = false)
-    private Date date;
+    private BigDecimal prixUnitaire;
     @Column(nullable = false)
     private BigDecimal prixTotal;
     @Column(nullable = false)
     private Long etat;
 
-    @JsonIgnoreProperties(value="commandes", allowSetters=true,allowGetters = false)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FK_CLIENT",insertable = false,updatable = true)
-    private Client client;
 
-    @JsonIgnoreProperties(value={"commande"}, allowSetters=true,allowGetters = false)
-    @OneToMany(mappedBy = "commande")
-    private List<LigneCommande> ligneCommandes;
+    @JsonIgnoreProperties(value="ligneCommandes", allowSetters=true,allowGetters = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_COMMANDE",insertable = false,updatable = true)
+    private Commande commande;
+
+
+    @Transient
+    private ProduitModel produitModel;
+    @Column(name = "ID_PRODUIT")
+    private Long idProduit;
 
 }

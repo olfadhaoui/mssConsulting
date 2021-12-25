@@ -30,7 +30,7 @@ public class ClientServiceImpl implements ClientService {
     ClientMapper clientMapper;
 
     private static final String DATE_FORMAt="dd/MM/yyyy";
-    //@Value("${entity.name.client}")
+    @Value("${entity.name.client}")
     private String entityName;
     @Override
     public Client create(Client entity) {

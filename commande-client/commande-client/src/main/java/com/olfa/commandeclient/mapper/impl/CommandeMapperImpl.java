@@ -23,7 +23,8 @@ public class CommandeMapperImpl implements CommandeMapper {
       return Commande.builder()
               .id(commandeModel.getId())
               .etat(commandeModel.getEtat())
-              .total(commandeModel.getTotal())
+              .prixTotal(commandeModel.getPrixTotal())
+              .numero(commandeModel.getNumero())
               .date(dateFormat.parse(commandeModel.getDate()))
               .client(clientMapper.toEntity(commandeModel.getClientModel()))
               .build();
@@ -35,7 +36,8 @@ public class CommandeMapperImpl implements CommandeMapper {
         return CommandeModel.builder()
                 .id(commande.getId())
                 .etat(commande.getEtat())
-                .total(commande.getTotal())
+                .numero(commande.getNumero())
+                .prixTotal(commande.getPrixTotal())
                 .date(commande.getDate().toString())
                 .clientModel(clientMapper.toModel(commande.getClient()))
                 .build();
