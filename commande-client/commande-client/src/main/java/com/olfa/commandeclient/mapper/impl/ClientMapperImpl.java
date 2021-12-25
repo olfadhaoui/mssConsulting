@@ -2,7 +2,9 @@ package com.olfa.commandeclient.mapper.impl;
 
 import com.olfa.commandeclient.entities.Client;
 import com.olfa.commandeclient.mapper.ClientMapper;
+import com.olfa.commandeclient.mapper.CommandeMapper;
 import com.olfa.commandeclient.models.ClientModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
@@ -13,7 +15,10 @@ import java.util.stream.Collectors;
 
 @Component
 public class ClientMapperImpl implements ClientMapper {
+    @Autowired
+    CommandeMapper commandeMapper;
     private static final String DATE_FORMAt="dd/MM/yyyy";
+
     @Override
     public Client toEntity(ClientModel clientModel) throws ParseException {
         DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAt);
@@ -31,6 +36,7 @@ public class ClientMapperImpl implements ClientMapper {
                 .fax(clientModel.getFax())
                 .gsm(clientModel.getGsm())
                 .tel(clientModel.getTel())
+                .commandes(commandeMapper.toListEntity(clientModel.getCommandeModels()))
                 .build();
     }
 
@@ -50,6 +56,7 @@ public class ClientMapperImpl implements ClientMapper {
                 .fax(client.getFax())
                 .gsm(client.getGsm())
                 .tel(client.getTel())
+                .commandeModels(commandeMapper.toListModel(client.getCommandes()))
                 .build();
     }
 

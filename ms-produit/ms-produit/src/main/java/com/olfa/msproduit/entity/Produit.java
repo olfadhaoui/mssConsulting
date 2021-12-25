@@ -1,4 +1,4 @@
-package com.olfa.commandeclient.entities;
+package com.olfa.msproduit.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -23,8 +22,8 @@ import java.util.List;
  *
  *
  */
-@Table(name = "CLIENT")
-public class Client implements Serializable {
+@Table(name = "PRODUIT")
+public class Produit implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ID")
@@ -32,26 +31,20 @@ public class Client implements Serializable {
     @Column(nullable = false)
     private String code;
     @Column(nullable = false)
-    private String nom;
+    private String marque;
     @Column(nullable = false)
-    private String prenom;
-    private Date dateNaissance;
+    private String modele;
     @Column(nullable = false)
-    private String adresse;
+    private String caracteristique;
     @Column(nullable = false)
-    private String ville;
+    private BigDecimal prixUnitaire;
     @Column(nullable = false)
-    private Long codePostal;
-    private String tel;
-    private String fax;
-    @Column(nullable = false)
-    private String gsm;
-    @Column(nullable = false)
-    private String email;
+    private Long quantite;
 
-    @JsonIgnoreProperties(value={"client"}, allowSetters=true,allowGetters = false)
-    @OneToMany(mappedBy = "client")
-    private List<Commande> commandes;
+    @JsonIgnoreProperties(value="produits", allowSetters=true,allowGetters = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_CATEGORIE",insertable = false,updatable = true)
+    private Categorie categorie;
 
 
 
