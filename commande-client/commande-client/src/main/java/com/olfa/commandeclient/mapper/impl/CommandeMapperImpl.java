@@ -5,16 +5,17 @@ import com.olfa.commandeclient.mapper.ClientMapper;
 import com.olfa.commandeclient.mapper.CommandeMapper;
 import com.olfa.commandeclient.models.CommandeModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Component
 public class CommandeMapperImpl implements CommandeMapper {
-    @Autowired
-    ClientMapper clientMapper;
+   //@Autowired
+   // ClientMapper clientMapper;
     private static final String DATE_FORMAt="dd/MM/yyyy";
     @Override
     public Commande toEntity(CommandeModel commandeModel) throws ParseException {
@@ -26,7 +27,7 @@ public class CommandeMapperImpl implements CommandeMapper {
               .prixTotal(commandeModel.getPrixTotal())
               .numero(commandeModel.getNumero())
               .date(dateFormat.parse(commandeModel.getDate()))
-              .client(clientMapper.toEntity(commandeModel.getClientModel()))
+            //  .client(clientMapper.toEntity(commandeModel.getClientModel()))
               .build();
     }
 
@@ -39,7 +40,7 @@ public class CommandeMapperImpl implements CommandeMapper {
                 .numero(commande.getNumero())
                 .prixTotal(commande.getPrixTotal())
                 .date(commande.getDate().toString())
-                .clientModel(clientMapper.toModel(commande.getClient()))
+               // .clientModel(clientMapper.toModel(commande.getClient()))
                 .build();
     }
 

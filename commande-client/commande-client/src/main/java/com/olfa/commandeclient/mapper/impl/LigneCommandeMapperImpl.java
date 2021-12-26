@@ -5,16 +5,14 @@ import com.olfa.commandeclient.mapper.CommandeMapper;
 import com.olfa.commandeclient.mapper.LigneCommandeMapper;
 import com.olfa.commandeclient.models.LigneCommandeModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Component
 public class LigneCommandeMapperImpl implements LigneCommandeMapper {
-    @Autowired
-    LigneCommandeMapper ligneCommandeMapper;
-    @Autowired
-    CommandeMapper commandeMapper;
+
     @Override
     public LigneCommande toEntity(LigneCommandeModel ligneCommandeModel) throws ParseException {
         if(ligneCommandeModel==null) return null;
@@ -26,7 +24,7 @@ public class LigneCommandeMapperImpl implements LigneCommandeMapper {
               .qte(ligneCommandeModel.getQte())
               .idProduit(ligneCommandeModel.getIdProduit())
               .produitModel(ligneCommandeModel.getProduitModel())
-              .commande(commandeMapper.toEntity(ligneCommandeModel.getCommandeModel()))
+
               .build();
 
     }
@@ -42,7 +40,7 @@ public class LigneCommandeMapperImpl implements LigneCommandeMapper {
                 .qte(ligneCommande.getQte())
                 .idProduit(ligneCommande.getIdProduit())
                 .produitModel(ligneCommande.getProduitModel())
-                .commandeModel(commandeMapper.toModel(ligneCommande.getCommande()))
+               // .commandeModel(commandeMapper.toModel(ligneCommande.getCommande()))
                 .build();
 
     }

@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class ClientMapperImpl implements ClientMapper {
-    @Autowired
-    CommandeMapper commandeMapper;
+   // @Autowired
+    //CommandeMapper commandeMapper;
     private static final String DATE_FORMAt="dd/MM/yyyy";
 
     @Override
@@ -36,7 +36,7 @@ public class ClientMapperImpl implements ClientMapper {
                 .fax(clientModel.getFax())
                 .gsm(clientModel.getGsm())
                 .tel(clientModel.getTel())
-                .commandes(commandeMapper.toListEntity(clientModel.getCommandeModels()))
+                ///.commandes(commandeMapper.toListEntity(clientModel.getCommandeModels()))
                 .build();
     }
 
@@ -56,7 +56,7 @@ public class ClientMapperImpl implements ClientMapper {
                 .fax(client.getFax())
                 .gsm(client.getGsm())
                 .tel(client.getTel())
-                .commandeModels(commandeMapper.toListModel(client.getCommandes()))
+               ///.commandeModels(commandeMapper.toListModel(client.getCommandes()))
                 .build();
     }
 
