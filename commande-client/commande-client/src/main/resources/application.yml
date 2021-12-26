@@ -10,3 +10,4 @@ entity:
       name:
         client: client
         commande: commande
+        ligneCommande: ligne commande
